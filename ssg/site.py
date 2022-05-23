@@ -1,7 +1,7 @@
 import sys
 from pathlib import Path
 
-from ssg import extensions
+from ssg import extensions, hooks
 
 
 class Site:
@@ -16,7 +16,6 @@ class Site:
         for parser in self.parsers:
             if parser.valid_file_ext(ext):
                 return parser
-                
     def run_parser(self, path):
         parser = self.load_parser(path.suffix)
         if parser is not None:
