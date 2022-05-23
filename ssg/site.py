@@ -16,6 +16,7 @@ class Site:
         for parser in self.parsers:
             if parser.valid_file_ext(ext):
                 return parser
+                
     def run_parser(self, path):
         parser = self.load_parser(path.suffix)
         if parser is not None:
@@ -25,9 +26,9 @@ class Site:
                 "No parser for the {} extension, file skipped!".format(path.suffix)
             )
 
-
     def build(self):
         extensions.load_bundled()
+        hooks.event("collect_files", self.source, self.parsers)
         self.dest.mkdir(parents=True, exist_ok=True)
         for path in self.source.rglob("*"):
             if path.is_dir():
