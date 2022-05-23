@@ -25,6 +25,7 @@ class Site:
                 "No parser for the {} extension, file skipped!".format(path.suffix)
             )
 
+
     def build(self):
         extensions.load_bundled()
         self.dest.mkdir(parents=True, exist_ok=True)
